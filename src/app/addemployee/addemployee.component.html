@@ -14,7 +14,7 @@
     </div>
     <hr />
     <div class="popup-form">
-      <form class="w-100">
+      <form class="w-100" (ngSubmit)="onMyFormSubmit()" [formGroup]="myRecForm">
         <div class="name mb-3">
           <label class="h6" for="name">{{ "Name:-" | titlecase }}</label>
           <input
@@ -22,8 +22,13 @@
             class="form-control"
             id="name"
             placeholder="Enter your name..."
+            formControlName="name"
           />
-          <small class="text-danger d-none">please enter your name!</small>
+          <small
+            *ngIf="!fc?.['name']?.valid && fc?.['name']?.touched"
+            class="text-danger"
+            >please enter your name!</small
+          >
         </div>
 
         <div class="designation mb-3">
@@ -35,8 +40,12 @@
             class="form-control"
             id="designation"
             placeholder="Enter your designation"
+            formControlName="designation"
           />
-          <small class="text-danger d-none">
+          <small
+            *ngIf="!fc?.['designation']?.valid && fc?.['designation']?.touched"
+            class="text-danger"
+          >
             please enter your designation!
           </small>
         </div>
@@ -45,28 +54,40 @@
           <label class="h6" for="department">
             {{ "Chose Department:-" | titlecase }}
           </label>
-          <select class="form-control select-data" name="" id="department">
-            <option value="department">Designer</option>
-            <option value="department">Developer</option>
-            <option value="department">Software Engineer</option>
+          <select
+            class="form-control select-data"
+            id="department"
+            formControlName="department"
+          >
+            <option value="designer">Designer</option>
+            <option value="developer">Developer</option>
+            <option value="software engineer">Software Engineer</option>
           </select>
           <small class="text-danger d-none">
             please enter your designation!
           </small>
         </div>
 
-        <div class="department mb-3">
+        <div class="status mb-3">
           <label class="h6" for="status">
             {{ "Chose Status:-" | titlecase }}
           </label>
-          <select class="form-control select-data" name="" id="status">
+          <select
+            class="form-control select-data"
+            formControlName="status"
+            id="status"
+          >
             <option value="active">Active</option>
-            <option value="active">Inactive</option>
+            <option value="inactive">Inactive</option>
           </select>
         </div>
 
         <div class="close-submit">
-          <button type="button" class="btn btn-danger">Close</button>
+          <button 
+          type="button" 
+          class="btn btn-danger"
+          (click)="onShowEmployee()"
+          >Close</button>
           &nbsp;&nbsp; &nbsp;&nbsp;
           <button type="submit" class="btn btn-success">Submit</button>
         </div>

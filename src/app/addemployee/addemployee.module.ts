@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AddemployeeRoutingModule } from './addemployee-routing.module';
 import { AddemployeeComponent } from './addemployee.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { AddemployeeComponent } from './addemployee.component';
   ],
   imports: [
     CommonModule,
-    AddemployeeRoutingModule
+    AddemployeeRoutingModule,
+    ReactiveFormsModule
   ],
   exports:[
     AddemployeeComponent

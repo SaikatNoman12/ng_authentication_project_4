@@ -1,6 +1,7 @@
 import { AddEmployeeService } from './../../appService/add-employee.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DatabaseService } from 'src/app/appService/database.service';
 
 
 
@@ -9,8 +10,9 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule
   ],
-  providers:[
-    AddEmployeeService
+  providers: [
+    AddEmployeeService,
+    DatabaseService
   ]
 })
 export class SharedModule { }
