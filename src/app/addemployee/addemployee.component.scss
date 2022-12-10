@@ -2,7 +2,7 @@
   position: absolute;
   background-color: rgba(51, 51, 51, 0.536);
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   top: 0;
   left: 0;
   display: flex;
@@ -11,18 +11,17 @@
   z-index: 1;
 }
 
-
-.my-form{
-    background-color: #fff;
-    width: 600px;
-    height: 50vh;
-    border-radius: 10px;
-    z-index: 111;
-    // border: 2px solid crimson;
-    box-shadow: 0px 0px 10px #0000004d;
+.my-form {
+  background-color: #fff;
+  width: 600px;
+  min-height: 0vh;
+  border-radius: 10px;
+  z-index: 111;
+  // border: 2px solid crimson;
+  box-shadow: 0px 0px 10px #0000004d;
 }
 
-.delete-button button{
+.delete-button button {
   background-color: transparent;
   border: 0;
   outline: 0;
@@ -31,9 +30,32 @@
   justify-content: center;
 }
 
-.delete-button button i{
+.delete-button button i {
   color: crimson;
   font-size: 24px;
   display: block;
   padding-top: 2px;
+}
+
+.select-data {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.select-data option {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.close-submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close-submit button {
+  font-size: 18px;
+  font-weight: 500;
+  padding-left: 20px;
+  padding-right: 20px;
 }

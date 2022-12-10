@@ -1,5 +1,4 @@
 <div class="pop-up" (click)="onShowEmployee()">
-
   <div class="my-form p-3" (click)="$event.stopPropagation()">
     <div
       class="form-top-header d-flex align-items-center justify-content-between pt-0 p-3 pb-0"
@@ -8,14 +7,70 @@
         <h5 class="m-0">{{ "Add Employee" | uppercase }}</h5>
       </div>
       <div class="delete-button">
-        <button type="button"
-        (click)="onShowEmployee()"
-        >
+        <button type="button" (click)="onShowEmployee()">
           <i class="far fa-times-circle"></i>
         </button>
       </div>
     </div>
     <hr />
-  </div>
+    <div class="popup-form">
+      <form class="w-100">
+        <div class="name mb-3">
+          <label class="h6" for="name">{{ "Name:-" | titlecase }}</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Enter your name..."
+          />
+          <small class="text-danger d-none">please enter your name!</small>
+        </div>
 
+        <div class="designation mb-3">
+          <label class="h6" for="designation">
+            {{ "Designation:-" | titlecase }}
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            id="designation"
+            placeholder="Enter your designation"
+          />
+          <small class="text-danger d-none">
+            please enter your designation!
+          </small>
+        </div>
+
+        <div class="department mb-3">
+          <label class="h6" for="department">
+            {{ "Chose Department:-" | titlecase }}
+          </label>
+          <select class="form-control select-data" name="" id="department">
+            <option value="department">Designer</option>
+            <option value="department">Developer</option>
+            <option value="department">Software Engineer</option>
+          </select>
+          <small class="text-danger d-none">
+            please enter your designation!
+          </small>
+        </div>
+
+        <div class="department mb-3">
+          <label class="h6" for="status">
+            {{ "Chose Status:-" | titlecase }}
+          </label>
+          <select class="form-control select-data" name="" id="status">
+            <option value="active">Active</option>
+            <option value="active">Inactive</option>
+          </select>
+        </div>
+
+        <div class="close-submit">
+          <button type="button" class="btn btn-danger">Close</button>
+          &nbsp;&nbsp; &nbsp;&nbsp;
+          <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
