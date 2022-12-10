@@ -1,0 +1,21 @@
+<div class="pop-up" (click)="onShowEmployee()">
+
+  <div class="my-form p-3" (click)="$event.stopPropagation()">
+    <div
+      class="form-top-header d-flex align-items-center justify-content-between pt-0 p-3 pb-0"
+    >
+      <div class="employee-title">
+        <h5 class="m-0">{{ "Add Employee" | uppercase }}</h5>
+      </div>
+      <div class="delete-button">
+        <button type="button"
+        (click)="onShowEmployee()"
+        >
+          <i class="far fa-times-circle"></i>
+        </button>
+      </div>
+    </div>
+    <hr />
+  </div>
+
+</div>

@@ -1,0 +1,35 @@
+.navbar-brand {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.signIn {
+  font-size: 20px;
+  color: #dc3545;
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 6px 12px;
+  border: 1px solid #dc3545;
+  font-size: 20px;
+  transition: 300ms;
+}
+
+.signIn:hover{
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.dashboard {
+  text-decoration: none;
+  color: #fff;
+  background-color: rgba(128, 128, 128, 0.436);
+  border-radius: 5px;
+  padding: 8px 12px;
+  border: 1px solid green;
+  font-size: 20px;
+  transition: 300ms;
+}
+
+.dashboard:hover{
+    background-color: rgba(128, 128, 128, 0.705);
+}
