@@ -39,8 +39,8 @@ export class DatabaseService {
 
   // delete data in database:-
   onDeleteData(userId: string) {
-    // const userUrl = `${config.API_URL}${userId}.json`;
-    // this.http.delete(userUrl);
+    const userUrl = `${config.USER_URL}${userId}.json`;
+    return this.http.delete(userUrl);
   }
 
 }

@@ -39,7 +39,12 @@ export class DashboardComponent implements OnInit {
   // 
   onDeleteEmployee(userId: string) {
     console.log(userId);
-    console.log('fdfdf');
+    this._database.onDeleteData(userId).subscribe(
+      (res) => {
+        this.onFetchDatabaseData();
+      },
+      (err) => { }
+    )
   }
 
 
