@@ -1,3 +1,4 @@
+import { DashboardComponent } from './../dashboard/dashboard.component';
 import { DatabaseService } from 'src/app/appService/database.service';
 import { User } from './../appInterface/user';
 import { Component, OnInit } from '@angular/core';
@@ -15,8 +16,11 @@ export class AddemployeeComponent implements OnInit {
 
   constructor(
     private _addEmployee: AddEmployeeService,
-    private _database: DatabaseService
+    private _database: DatabaseService,
+    private _dashboardCompo: DashboardComponent
   ) { }
+
+
 
   ngOnInit(): void {
 
@@ -54,21 +58,23 @@ export class AddemployeeComponent implements OnInit {
       alert('Please enter your designation!');
     }
     else {
-      const UserData: User = this.myRecForm.value;
-      this._database.onPostData(UserData).subscribe(
-        (res) => { },
+      const userData: User = this.myRecForm.value;
+      this._database.onPostData(userData).subscribe(
+        (res) => {
+          this._dashboardCompo.onFetchDatabaseData();
+        },
         (err) => { }
-      )
+      );
+
       this.myRecForm.reset({
         'name': null,
         'designation': null,
         'department': 'developer',
         'status': 'active'
       });
-      
       this.onShowEmployee();
     }
-    // console.log(this.fc?.['name'].valid);
   }
+
 
 }
