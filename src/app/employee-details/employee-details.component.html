@@ -1,46 +1,59 @@
 <div class="container border-top-0 border pt-4 pb-3">
   <h1 class="text center">{{ "Employee Detail" | uppercase }}</h1>
   <hr />
-  <div class="employee-info">
-    <div class="employee-image">
-      <img
-        src="https://media.istockphoto.com/id/1131164548/vector/avatar-5.jpg?s=612x612&w=0&k=20&c=CK49ShLJwDxE4kiroCR42kimTuuhvuo2FH5y_6aSgEo="
-        alt="User"
-      />
+  <ng-container *ngIf="!spinnerShow">
+    <div class="employee-info">
+      <div class="employee-image">
+        <img
+          src="https://media.istockphoto.com/id/1131164548/vector/avatar-5.jpg?s=612x612&w=0&k=20&c=CK49ShLJwDxE4kiroCR42kimTuuhvuo2FH5y_6aSgEo="
+          alt="User"
+        />
+      </div>
+      <div class="card-info">
+        <div class="name info">
+          <h4>Name:</h4>
+          <h4>{{ getUserData?.name }}</h4>
+        </div>
+
+        <div class="designation info">
+          <h4>Designation:</h4>
+          <h4>{{ getUserData?.designation }}</h4>
+        </div>
+
+        <div class="department info">
+          <h4>Department:</h4>
+          <h4>{{ getUserData?.department }}</h4>
+        </div>
+
+        <div class="status info">
+          <h4>Status:</h4>
+          <h4 *ngIf="getUserData?.status === 'active'" class="active">
+            Active
+          </h4>
+          <h4 *ngIf="getUserData?.status === 'inactive'" class="inactive">
+            Inactive
+          </h4>
+        </div>
+
+        <div class="view info">
+          <button
+            type="button"
+            class="btn btn-success me-3"
+            routerLink="/dashboard"
+          >
+            Back To Dashboard
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="card-info">
-      <div class="name info">
-        <h4>Name:</h4>
-        <h4>{{ getUserData?.name }}</h4>
-      </div>
+  </ng-container>
 
-      <div class="designation info">
-        <h4>Designation:</h4>
-        <h4>{{ getUserData?.designation }}</h4>
+  <ng-container *ngIf="spinnerShow">
+    <div class="d-flex justify-content-center align-items-center mt-2">
+      <div class="spinner-border text-warning" role="status">
+        <span class="visually-hidden">Loading...</span>
       </div>
-
-      <div class="department info">
-        <h4>Department:</h4>
-        <h4>{{ getUserData?.department }}</h4>
-      </div>
-
-      <div class="status info">
-        <h4>Status:</h4>
-        <h4 *ngIf="getUserData?.status === 'active'" class="active">Active</h4>
-        <h4 *ngIf="getUserData?.status === 'inactive'" class="inactive">
-          Inactive
-        </h4>
-      </div>
-
-      <div class="view info">
-        <button
-          type="button"
-          class="btn btn-success me-3"
-          routerLink="/dashboard"
-        >
-          Back To Dashboard
-        </button>
-      </div>
+      &nbsp;&nbsp; Fetching data...
     </div>
-  </div>
+  </ng-container>
 </div>

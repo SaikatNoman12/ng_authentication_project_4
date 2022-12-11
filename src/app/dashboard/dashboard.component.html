@@ -36,57 +36,70 @@
   </div>
   <hr />
 
-  <div class="cards">
-    <ng-container *ngFor="let user of dbDataArray">
-      <div class="card">
-        <div class="userImage">
-          <img
-            src="https://media.istockphoto.com/id/1131164548/vector/avatar-5.jpg?s=612x612&w=0&k=20&c=CK49ShLJwDxE4kiroCR42kimTuuhvuo2FH5y_6aSgEo="
-            alt="user"
-          />
+  <div>
+    <div class="cards">
+      <ng-container *ngIf="!spinnerShow">
+        <ng-container *ngFor="let user of dbDataArray">
+          <div class="card">
+            <div class="userImage">
+              <img
+                src="https://media.istockphoto.com/id/1131164548/vector/avatar-5.jpg?s=612x612&w=0&k=20&c=CK49ShLJwDxE4kiroCR42kimTuuhvuo2FH5y_6aSgEo="
+                alt="user"
+              />
+            </div>
+
+            <div class="card-info">
+              <div class="name info">
+                <h4>Name:</h4>
+                <h4>{{ user.name }}</h4>
+              </div>
+
+              <div class="designation info">
+                <h4>Designation:</h4>
+                <h4>{{ user.designation }}</h4>
+              </div>
+
+              <div class="department info">
+                <h4>Department:</h4>
+                <h4>{{ user.department }}</h4>
+              </div>
+
+              <div class="status info">
+                <h4>Status:</h4>
+                <h4 *ngIf="user.status === 'active'" class="active">Active</h4>
+                <h4 *ngIf="user.status === 'inactive'" class="inactive">
+                  Inactive
+                </h4>
+              </div>
+
+              <div class="view info">
+                <button
+                  type="button"
+                  class="btn btn-success me-3"
+                  [routerLink]="'id' + user.userId"
+                >
+                  View Employee
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger px-3"
+                  (click)="onDeleteEmployee(user.userId)"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <ng-container *ngIf="spinnerShow">
+      <div class="d-flex justify-content-center align-items-center mt-2">
+        <div class="spinner-border text-warning" role="status">
+          <span class="visually-hidden">Loading...</span>
         </div>
-
-        <div class="card-info">
-          <div class="name info">
-            <h4>Name:</h4>
-            <h4>{{ user.name }}</h4>
-          </div>
-
-          <div class="designation info">
-            <h4>Designation:</h4>
-            <h4>{{ user.designation }}</h4>
-          </div>
-
-          <div class="department info">
-            <h4>Department:</h4>
-            <h4>{{ user.department }}</h4>
-          </div>
-
-          <div class="status info">
-            <h4>Status:</h4>
-            <h4 *ngIf="user.status === 'active'" class="active">Active</h4>
-            <h4 *ngIf="user.status === 'inactive'" class="inactive">
-              Inactive
-            </h4>
-          </div>
-
-          <div class="view info">
-            <button
-              type="button"
-              class="btn btn-success me-3"
-              [routerLink]="'id' + user.userId"
-            >
-              View Employee
-            </button>
-            <button
-              type="button"
-              class="btn btn-danger px-3"
-              (click)="onDeleteEmployee(user.userId)"
-            >
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-        </div>
+        &nbsp;&nbsp; Fetching data...
       </div>
     </ng-container>
   </div>

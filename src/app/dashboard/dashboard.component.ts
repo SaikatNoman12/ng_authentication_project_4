@@ -12,6 +12,8 @@ export class DashboardComponent implements OnInit {
   addEmployee: any;
   dbDataArray: any;
 
+  spinnerShow: boolean = false;
+
   constructor(
     private _addEmployee: AddEmployeeService,
     private _database: DatabaseService,
@@ -47,9 +49,11 @@ export class DashboardComponent implements OnInit {
 
   // fetch database data:
   onFetchDatabaseData() {
+    this.spinnerShow = true;
     this._database.onFetchData().subscribe(
       (response: any) => {
         this.dbDataArray = response;
+        this.spinnerShow = false;
       }
     );
 

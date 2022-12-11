@@ -10,6 +10,8 @@ import { User } from '../appInterface/user';
 })
 export class EmployeeDetailsComponent implements OnInit {
 
+  spinnerShow: boolean = false;
+
   constructor(
     private _activeRoute: ActivatedRoute,
     private _database: DatabaseService
@@ -30,10 +32,12 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   onFetchSingleData() {
+    this.spinnerShow = true;
     this._database.onFetchSingleData(this.getRouteId).subscribe(
       (response: any) => {
         if (response !== null) {
           this.getUserData = response;
+          this.spinnerShow = false;
         }
       },
       (err: any) => { }
