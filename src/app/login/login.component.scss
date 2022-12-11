@@ -1,0 +1,122 @@
+.logo {
+  margin-bottom: 24px;
+  display: flex;
+  //   align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.logo h1 {
+  font-size: 56px;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.logo h4 {
+  font-size: 18px;
+  color: #333;
+}
+
+.login-google {
+  width: 100%;
+  height: 300px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 0px;
+  position: relative;
+}
+
+.or {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  border-left: 1px dashed gray;
+}
+.or span {
+  position: absolute;
+  top: 50%;
+  display: block;
+  left: -13px;
+  background: #fff;
+  border-radius: 50%;
+  padding: 2px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  font-weight: 500;
+  color: gray;
+}
+
+.input-group-prepend span {
+  border-radius: 5px 0px 0px 5px !important;
+  height: 100%;
+}
+
+.input-group-prepend span i {
+  color: gray;
+}
+
+.create h6 {
+  font-weight: 400;
+}
+
+.create h6 a {
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.title {
+  margin-bottom: 16px;
+}
+
+.title h3 {
+  color: #333;
+  font-size: 28px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.title h6 {
+  color: #333;
+  font-size: 14px;
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+
+.login,
+.google-facebook-create {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.google,
+.facebook {
+  width: 100%;
+  padding: 6px 14px;
+  border: 1px solid gray;
+  outline: 0px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.google span:first-child,
+.facebook span:first-child {
+  margin-right: 8px;
+}
+
+.google span:first-child {
+  color: rgb(255, 157, 0);
+}
+
+.facebook span:first-child {
+  color: blue;
+}
+
+.google span:last-child,
+.facebook span:last-child {
+  font-weight: 400;
+}

@@ -1,3 +1,8 @@
+.navbar {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
 .navbar-brand {
   font-size: 32px;
   font-weight: 600;
@@ -14,9 +19,9 @@
   transition: 300ms;
 }
 
-.signIn:hover{
-    background-color: #dc3545;
-    color: #fff;
+.signIn:hover {
+  background-color: #dc3545;
+  color: #fff;
 }
 
 .dashboard {
@@ -30,6 +35,6 @@
   transition: 300ms;
 }
 
-.dashboard:hover{
-    background-color: rgba(128, 128, 128, 0.705);
+.dashboard:hover {
+  background-color: rgba(128, 128, 128, 0.705);
 }

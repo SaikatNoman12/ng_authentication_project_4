@@ -1,0 +1,84 @@
+<br />
+<br />
+
+<div class="container w-75 shadow rounded p-4">
+  <div class="logo text-center">
+    <h1>{{ "Logo" | uppercase }}</h1>
+    <h4>
+      {{ "SignIn Into" | titlecase }}
+      <span class="text-primary">{{ "Logo" | titlecase }}</span>
+    </h4>
+  </div>
+  <div class="login-google">
+    <div class="or">
+      <span>OR</span>
+    </div>
+    <div class="login w-50 mx-auto ">
+      <form>
+        <div class="form-group input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">
+              <i class="fas fa-envelope"></i>
+            </span>
+          </div>
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Email"
+            aria-label="Username"
+            aria-describedby="basic-addon1"
+          />
+        </div>
+
+        <div class="form-group input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">
+              <i class="fas fa-lock"></i>
+            </span>
+          </div>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Password"
+            aria-label="Username"
+            aria-describedby="basic-addon1"
+          />
+        </div>
+
+        <div class="signin-btn mb-3">
+          <button class="btn btn-outline-primary w-100" type="submit">
+            Sign In
+          </button>
+        </div>
+
+        <div class="create">
+          <h6>
+            Do not have account?
+            <a href="#">Create one</a>
+            <br />
+            <a href="#"> Forgot password</a>
+          </h6>
+        </div>
+      </form>
+    </div>
+
+    <div class="google-facebook-create w-50 mx-auto ">
+      <div class="title mb-2 text-center">
+        <h3>Go with Social!</h3>
+        <h6>Get started with your Social accounts</h6>
+      </div>
+
+      <div class="google-facebook">
+        <button class="google">
+          <span><i class="fab fa-google"></i></span>
+          <span> Sign In vai Google </span>
+        </button>
+        <br />
+        <button class="facebook">
+          <span><i class="fab fa-facebook-f"></i></span>
+          <span> Sign In vai Google </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

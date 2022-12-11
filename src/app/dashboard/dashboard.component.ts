@@ -37,7 +37,6 @@ export class DashboardComponent implements OnInit {
 
   // delete database data:-
   onDeleteEmployee(userId: string) {
-    console.log(userId);
     this._database.onDeleteData(userId).subscribe(
       (res) => {
         this.onFetchDatabaseData();
@@ -55,10 +54,5 @@ export class DashboardComponent implements OnInit {
     );
 
   }
-
-  onViewEmployee(userId: string) {
-    console.log(userId);
-  }
-
 
 }

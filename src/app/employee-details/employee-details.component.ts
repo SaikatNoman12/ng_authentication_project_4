@@ -32,7 +32,9 @@ export class EmployeeDetailsComponent implements OnInit {
   onFetchSingleData() {
     this._database.onFetchSingleData(this.getRouteId).subscribe(
       (response: any) => {
-        this.getUserData = response;
+        if (response !== null) {
+          this.getUserData = response;
+        }
       },
       (err: any) => { }
     );
