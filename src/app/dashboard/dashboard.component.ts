@@ -1,4 +1,3 @@
-
 import { DatabaseService } from 'src/app/appService/database.service';
 import { AddEmployeeService } from './../appService/add-employee.service';
 import { Component, OnInit } from '@angular/core';
@@ -36,7 +35,7 @@ export class DashboardComponent implements OnInit {
     this.addEmployee = !this.addEmployee;
   }
 
-  // 
+  // delete database data:-
   onDeleteEmployee(userId: string) {
     console.log(userId);
     this._database.onDeleteData(userId).subscribe(
@@ -47,7 +46,6 @@ export class DashboardComponent implements OnInit {
     )
   }
 
-
   // fetch database data:
   onFetchDatabaseData() {
     this._database.onFetchData().subscribe(
@@ -56,6 +54,10 @@ export class DashboardComponent implements OnInit {
       }
     );
 
+  }
+
+  onViewEmployee(userId: string) {
+    console.log(userId);
   }
 
 

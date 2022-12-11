@@ -71,7 +71,11 @@
           </div>
 
           <div class="view info">
-            <button type="button" class="btn btn-success me-3">
+            <button
+              type="button"
+              class="btn btn-success me-3"
+              [routerLink]="'id' + user.userId"
+            >
               View Employee
             </button>
             <button

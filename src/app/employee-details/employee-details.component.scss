@@ -1,0 +1,56 @@
+.employee-image {
+  margin-bottom: 22px;
+}
+
+.employee-image img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.card-info .info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: 8px;
+}
+
+.card-info .info h4 {
+  margin: 0px;
+  font-size: 18px;
+  font-weight: 500;
+  word-wrap: break-word;
+}
+
+.card-info .info h4:first-child {
+  margin-right: 5px;
+  font-weight: 400;
+}
+
+.view {
+  margin-top: 10px;
+  margin-bottom: 0px !important;
+}
+
+.active,
+.inactive {
+  font-size: 15px !important;
+  border-radius: 5px;
+  padding: 2px 8px;
+  color: #fff;
+}
+
+.active {
+  background-color: green;
+}
+
+.inactive {
+  background-color: orange;
+}

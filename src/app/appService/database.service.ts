@@ -43,4 +43,9 @@ export class DatabaseService {
     return this.http.delete(userUrl);
   }
 
+  onFetchSingleData(userId: string) {
+    const userUrl = `${config.USER_URL}${userId}.json`;
+    return this.http.get(userUrl);
+  }
+
 }

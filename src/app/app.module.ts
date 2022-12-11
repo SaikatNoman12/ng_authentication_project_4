@@ -6,10 +6,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HeaderModule } from './header/header.module';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EmployeeDetailsComponent
   ],
   imports: [
     BrowserModule,

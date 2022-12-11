@@ -4,8 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path:'',
-    component:DashboardComponent
+    path: '',
+    component: DashboardComponent
+  },
+  {
+    path: ':employeeId',
+    loadChildren: () => import('../employee-details/employee-details.module')
+      .then(m => m.EmployeeDetailsModule)
   }
 ];
 
