@@ -20,4 +20,16 @@ export class AuthService {
     });
   }
 
+
+  onSignIn(email: any, pass: any) {
+    return this.http.post<Responce>(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${config.API_KEY}`,
+      {
+        email: email,
+        password: pass,
+        returnSecureToken: true
+      }
+    )
+  }
+
 }

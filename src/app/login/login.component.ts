@@ -1,6 +1,8 @@
+import { Responce } from './../appInterface/authResponce/responce';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../appService/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -41,15 +43,28 @@ export class LoginComponent implements OnInit {
     if (this.myRecForm.valid) {
       const email = this.myRecForm.value.email;
       const password = this.myRecForm.value.password;
-      this._authService.onSignUp(email, password)
-        .subscribe(
-          (res: any) => {
-            console.log(res);
-          },
-          (err: any) => {
-            console.log(err);
-          }
-        )
+
+      let authObservable: Observable<Responce>;
+
+      if (this.modeSwitch) {
+        // sign in:--
+        authObservable = this._authService.onSignIn(email, password)
+      }
+      else {
+        // sign up:--
+        authObservable = this._authService.onSignUp(email, password)
+      }
+
+      // observable:--
+      authObservable.subscribe(
+        (res: any) => {
+          console.log(res);
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+
     }
     else {
     }
