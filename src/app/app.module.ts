@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HeaderModule } from './header/header.module';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 
 @NgModule({
@@ -17,7 +17,7 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
     BrowserModule,
     AppRoutingModule,
     HeaderModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

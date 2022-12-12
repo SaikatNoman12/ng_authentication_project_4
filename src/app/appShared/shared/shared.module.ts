@@ -1,3 +1,4 @@
+import { ErrorService } from './../../appService/error.service';
 import { AddEmployeeService } from './../../appService/add-employee.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,7 +15,8 @@ import { AuthService } from 'src/app/appService/auth.service';
   providers: [
     AddEmployeeService,
     DatabaseService,
-    AuthService
+    AuthService,
+    ErrorService
   ]
 })
 export class SharedModule { }

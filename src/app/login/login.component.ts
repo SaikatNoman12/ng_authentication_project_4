@@ -1,3 +1,4 @@
+import { ErrorService } from './../appService/error.service';
 import { Responce } from './../appInterface/authResponce/responce';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -12,13 +13,17 @@ import { Observable } from 'rxjs';
 export class LoginComponent implements OnInit {
 
   modeSwitch: boolean = true;
+  error: any;
 
   myRecForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _errorService: ErrorService
   ) { }
+
+  errorMsg: any = this._errorService.errorMessage;
 
   ngOnInit(): void {
 
@@ -61,7 +66,22 @@ export class LoginComponent implements OnInit {
           console.log(res);
         },
         (err: any) => {
-          console.log(err);
+
+          setTimeout(() => {
+            // this.error = this.errorMsg[err];
+            this.error = err;
+          }, 0);
+          setTimeout(() => {
+            this.error = '';
+          }, 6000);
+          /* // error message:- 
+          if (!err.error || !err.error.error) {
+            this.error = this.errorMsg['UNKNOWN'];
+          } 
+          else {
+            this.error = this.errorMsg[err.error.error.message];
+          } */
+
         }
       );
 

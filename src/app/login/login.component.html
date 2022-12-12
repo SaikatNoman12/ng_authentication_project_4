@@ -1,6 +1,12 @@
 <br />
 <br />
-
+<ng-container *ngIf="error">
+  <div class="container w-75 mb-5 px-0">
+    <div class="alert alert-danger" role="alert">
+      <strong>An Error occurred</strong> {{ error }}
+    </div>
+  </div>
+</ng-container>
 <div class="container w-75 shadow rounded p-4">
   <div class="logo text-center">
     <h1>{{ "Logo" | uppercase }}</h1>

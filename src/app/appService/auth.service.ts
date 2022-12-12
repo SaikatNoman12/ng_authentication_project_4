@@ -2,6 +2,8 @@ import { Responce } from './../appInterface/authResponce/responce';
 import { config } from './../appConfig/config';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ErrorService } from './error.service';
+import { catchError, pipe } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,8 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private _errorSer: ErrorService
   ) { }
 
   onSignUp(email: string, pass: string,) {
@@ -17,7 +20,14 @@ export class AuthService {
       email: email,
       password: pass,
       returnSecureToken: true
-    });
+    })
+      .pipe(
+        catchError(
+          (err: any) => {
+            return this._errorSer.handleError(err);
+          }
+        )
+      );
   }
 
 
@@ -30,6 +40,13 @@ export class AuthService {
         returnSecureToken: true
       }
     )
+      .pipe(
+        catchError(
+          (err: any) => {
+            return this._errorSer.handleError(err);
+          }
+        )
+      );
   }
 
 }
