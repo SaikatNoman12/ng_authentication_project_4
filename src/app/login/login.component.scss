@@ -64,6 +64,12 @@
 .create h6 a {
   font-weight: 500;
   text-decoration: none;
+  cursor: pointer;
+  color: blue;
+}
+
+.create h6 a:hover {
+  text-decoration: underline;
 }
 
 .title {
@@ -119,4 +125,8 @@
 .google span:last-child,
 .facebook span:last-child {
   font-weight: 400;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
 }
