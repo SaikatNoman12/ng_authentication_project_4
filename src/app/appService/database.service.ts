@@ -1,8 +1,9 @@
 import { User } from './../appInterface/user';
 import { config } from './../appConfig/config';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { exhaustMap, map, pipe, take } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class DatabaseService {
 
   constructor(
     private http: HttpClient,
+    private _authService: AuthService
   ) { }
 
   // post data in database:-
@@ -22,7 +24,33 @@ export class DatabaseService {
 
   // get data in database:-
   onFetchData() {
-    return this.http.get(this.url)
+
+    // use token:-
+    return this._authService.user.pipe(
+      take(1),
+      exhaustMap(
+        (user: any) => {
+          return this.http.get<User>(this.url, {
+            params: new HttpParams().set('auth', user.token)
+          });
+        }
+      ),
+      map(
+        (responseData: any) => {
+          const data = [];
+          for (const key in responseData) {
+            data.push({
+              userId: key,
+              ...responseData[key]
+            });
+          }
+          return data;
+        }
+      )
+    );
+
+    // not use token:-
+    /* return this.http.get(this.url)
       .pipe(map(
         (responseData: any) => {
           const dataArr = [];
@@ -34,7 +62,7 @@ export class DatabaseService {
           }
           return dataArr;
         }
-      ));
+      )); */
   }
 
   // delete data in database:-
@@ -45,7 +73,21 @@ export class DatabaseService {
 
   onFetchSingleData(userId: string) {
     const userUrl = `${config.USER_URL}${userId}.json`;
-    return this.http.get(userUrl);
+
+    // use token:-
+    return this._authService.user.pipe(
+      exhaustMap(
+        (user: any) => {
+          return this.http.get<User>(userUrl, {
+            params: new HttpParams().set('auth', user.token)
+          });
+        }
+      )
+    )
+
+    // not use token:-
+    /* return this.http.get(userUrl); */
+
   }
 
 }

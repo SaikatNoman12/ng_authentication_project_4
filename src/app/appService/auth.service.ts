@@ -3,7 +3,7 @@ import { config } from './../appConfig/config';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ErrorService } from './error.service';
-import { catchError, pipe, Subject, tap } from 'rxjs';
+import { BehaviorSubject, catchError, pipe, Subject, tap } from 'rxjs';
 import { User } from '../appModal/user.modal';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class AuthService {
     private _errorSer: ErrorService
   ) { }
 
-  user: any = new Subject<User>();
+  user: any = new BehaviorSubject<any>(null);
 
   onSignUp(email: string, pass: string,) {
     return this.http.post<Responce>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${config.API_KEY}`, {
@@ -68,7 +68,7 @@ export class AuthService {
     const expirationDate = new Date(new Date().getTime() + expireIn * 1000);
 
     const user = new User(email, userId, token, expirationDate);
-    console.log( 'User => ', user);
+    console.log('User => ', user);
 
     // send subject data:-
     this.user.next(user);
