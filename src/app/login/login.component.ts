@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
       // observable:--
       authObservable.subscribe(
         (res: any) => {
-          console.log(res);
+          // console.log(res);
         },
         (err: any) => {
 
