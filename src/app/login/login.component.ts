@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../appService/auth.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _authService: AuthService,
-    private _errorService: ErrorService
+    private _errorService: ErrorService,
+    private router: Router
   ) { }
 
   errorMsg: any = this._errorService.errorMessage;
@@ -64,6 +66,7 @@ export class LoginComponent implements OnInit {
       authObservable.subscribe(
         (res: any) => {
           // console.log(res);
+          this.router.navigate(['dashboard']);
         },
         (err: any) => {
 
@@ -74,6 +77,7 @@ export class LoginComponent implements OnInit {
           setTimeout(() => {
             this.error = '';
           }, 6000);
+          
           /* // error message:- 
           if (!err.error || !err.error.error) {
             this.error = this.errorMsg['UNKNOWN'];

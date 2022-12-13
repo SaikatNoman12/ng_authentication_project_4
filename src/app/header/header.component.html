@@ -10,52 +10,56 @@
             "Dashboard" | titlecase
           }}</a>
         </div> -->
-        <button class="signIn" type="button">
-          {{ "sign in" | titlecase }}
-        </button>
+        <ng-container *ngIf="!isLoggedIn">
+          <button class="signIn" type="button">
+            {{ "sign in" | titlecase }}
+          </button>
+        </ng-container>
 
-        <div class="head">
-          <div class="main-head">
-            <div class="head-img">
-              <img src="../../assets/pngegg.png" alt="user" />
-            </div>
+        <ng-container *ngIf="isLoggedIn">
+          <div class="head">
+            <div class="main-head">
+              <div class="head-img">
+                <img src="../../assets/pngegg.png" alt="user" />
+              </div>
 
-            <div class="head-info-btn">
-              <ul>
-                <li>
-                  <a href="#">
-                    <i class="fas fa-border-all"></i>
-                    Dashboard
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i class="fas fa-eye"></i>
-                    View Profile</a
-                  >
-                </li>
-                <li>
-                  <a href="#">
-                    <i class="fas fa-pencil-alt"></i>
-                    Edit Profile</a
-                  >
-                </li>
-                <li>
-                  <a href="#">
-                    <i class="fas fa-eye"></i>
-                    Change Password</a
-                  >
-                </li>
-                <li>
-                  <a href="#">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Sign Out</a
-                  >
-                </li>
-              </ul>
+              <div class="head-info-btn">
+                <ul>
+                  <li>
+                    <a href="#">
+                      <i class="fas fa-border-all"></i>
+                      Dashboard
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="fas fa-eye"></i>
+                      View Profile</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="fas fa-pencil-alt"></i>
+                      Edit Profile</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="fas fa-eye"></i>
+                      Change Password</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#" routerLink="/" >
+                      <i class="fas fa-sign-out-alt"></i>
+                      Sign Out</a
+                    >
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
+        </ng-container>
       </div>
     </nav>
   </div>
