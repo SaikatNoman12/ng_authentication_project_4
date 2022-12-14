@@ -68,6 +68,7 @@ export class AuthService {
     const expirationDate = new Date(new Date().getTime() + expireIn * 1000);
 
     const user = new User(email, userId, token, expirationDate);
+
     console.log('User => ', user);
 
     // send subject data:-
