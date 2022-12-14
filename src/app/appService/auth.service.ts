@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { ErrorService } from './error.service';
 import { BehaviorSubject, catchError, pipe, Subject, tap } from 'rxjs';
 import { User } from '../appModal/user.modal';
+import { Route, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private _errorSer: ErrorService
+    private _errorSer: ErrorService,
+    private router:Router
   ) { }
 
   user: any = new BehaviorSubject<any>(null);
@@ -40,6 +42,7 @@ export class AuthService {
 
 
   onSignIn(email: any, pass: any) {
+
     return this.http.post<Responce>(
       `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${config.API_KEY}`,
       {
@@ -62,6 +65,25 @@ export class AuthService {
       );
   }
 
+  autoSignIn() {
+
+    // const myData = JSON.parse(localStorage.getItem('userData') as any);
+
+    let userData = localStorage.getItem('userData');
+    let parseData = JSON.parse(userData as any);
+
+    if (!parseData) {
+      return;
+    }
+
+    const loggedUser = new User(parseData.email, parseData.id, parseData._token, new Date(parseData._tokenExpirationDate));
+    
+    if (loggedUser.token) {
+      this.router.navigate(['dashboard'])
+      this.user.next(loggedUser);
+    }
+  }
+
 
   private authenticatedUser(email: string, userId: string, token: string, expireIn: any) {
 
@@ -73,6 +95,9 @@ export class AuthService {
 
     // send subject data:-
     this.user.next(user);
+
+    // set signup data in localStorage:-
+    localStorage.setItem('userData', JSON.stringify(user));
 
   }
 

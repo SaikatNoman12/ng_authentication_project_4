@@ -15,7 +15,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-
     this._authService.user.subscribe(
       (res: any) => {
         // first system. use if else condition:-
@@ -34,12 +33,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.isLoggedIn = !!res;
 
       }
-    )
-
+    );
   }
 
   ngOnDestroy() {
 
+  }
+
+
+  onSignOutData() {
+    localStorage.removeItem('userData');
+    this.isLoggedIn = false;
   }
 
 }
