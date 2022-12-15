@@ -1,13 +1,13 @@
 import { AuthGuard } from './../appGurd/auth.guard';
-import { EmployeeDetailsComponent } from './employee-details.component';
+import { ProfileComponent } from './profile.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
+    path:'',
     canActivate:[AuthGuard],
-    component: EmployeeDetailsComponent
+    component:ProfileComponent
   }
 ];
 
@@ -15,4 +15,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class EmployeeDetailsRoutingModule { }
+export class ProfileRoutingModule { }

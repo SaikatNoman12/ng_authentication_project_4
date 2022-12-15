@@ -1,0 +1,55 @@
+.edit {
+  display: flex;
+  align-items: center;
+}
+
+.edit-btn {
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+
+.edit-btn span:last-child {
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+.edit-mode h4 {
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 18px;
+  color: gray;
+}
+
+.edit-mode h4 span:last-child {
+  margin-left: 6px;
+  color: #fff;
+  font-size: 16px;
+  padding: 0px 10px 4px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 1px;
+}
+
+.edit-mode h4 span.falseColor {
+  background-color: green;
+}
+
+.edit-mode h4 span.trueColor {
+  background-color: crimson;
+}
+
+label {
+  font-size: 18px;
+  color: gray;
+  margin: 0px;
+}
+
+.trueEdit {
+  display: block;
+  font-size: 24px;
+  font-weight: 500;
+  color: blue;
+}

@@ -1,0 +1,104 @@
+<br />
+<div class="container w-50 mx-auto shadow p-4 rounded">
+  <div class="d-flex justify-content-between">
+    <div>
+      <h1 class="m-0">{{ "Profile" | uppercase }}</h1>
+    </div>
+    <div class="edit">
+      <button
+        type="button"
+        class="btn btn-success edit-btn"
+        routerLink="/profile"
+        [queryParams]="{ EditMode: true }"
+      >
+        <span><i class="fas fa-pencil-alt"></i> </span>
+        <span> Edit Profile </span>
+      </button>
+    </div>
+  </div>
+  <hr />
+
+  <div class="edit-mode">
+    <h4>
+      <span> Edit Mode: </span>
+      <span
+        [ngClass]="{
+          falseColor: !editMode,
+          trueColor: editMode
+        }"
+      >
+        {{ editMode }}
+      </span>
+    </h4>
+  </div>
+  <hr />
+
+  <div>
+    <form [formGroup]="myRecForm" (ngSubmit)="onRecFormSubmit()">
+      <div class="mb-4">
+        <label class="h6" for="name">Name:</label>
+        <!-- profile section -->
+        <ng-container *ngIf="editMode">
+          <small class="trueEdit">Abdullah Al Nomaan</small>
+        </ng-container>
+
+        <!-- edit section -->
+        <ng-container *ngIf="!editMode">
+          <input
+            class="form-control"
+            type="text"
+            id="name"
+            placeholder="Edit name..."
+            formControlName="name"
+          />
+          <small
+            *ngIf="!fControl?.['name']?.valid && fControl?.['name']?.touched"
+            class="text-danger"
+          >
+            Please edit your name!</small
+          >
+        </ng-container>
+      </div>
+
+      <div class="mb-4">
+        <label class="h6" for="profile">Enter profile picture URL:</label>
+        <!-- profile section -->
+        <ng-container *ngIf="editMode">
+          <small class="trueEdit">Text URL</small>
+        </ng-container>
+
+        <!-- edit section -->
+        <ng-container *ngIf="!editMode">
+          <input
+            class="form-control"
+            type="text"
+            id="profile"
+            placeholder="Edit profile picture..."
+            formControlName="profile-img"
+          />
+          <small
+            *ngIf="!fControl?.['profile-img']?.valid && fControl?.['profile-img']?.touched"
+            class="text-danger"
+          >
+            Please edit your profile picture!</small
+          >
+        </ng-container>
+      </div>
+
+      <!-- edit section button -->
+      <ng-container *ngIf="!editMode">
+        <div class="mb-4">
+          <button type="submit" class="btn btn-primary">Save Profile</button>
+          &nbsp;&nbsp;
+          <button
+            class="px-3 btn btn-outline-secondary"
+            type="button"
+            (click)="onDiscard()"
+          >
+            Discard
+          </button>
+        </div>
+      </ng-container>
+    </form>
+  </div>
+</div>
