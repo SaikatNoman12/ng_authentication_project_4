@@ -23,9 +23,7 @@ export class AuthGuard implements CanActivate {
         (response: any) => {
 
           if (response) {
-
             return true;
-
           }
           else {
 

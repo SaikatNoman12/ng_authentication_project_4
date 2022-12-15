@@ -81,8 +81,12 @@ export class AuthService {
     const loggedUser = new User(parseData.email, parseData.id, parseData._token, new Date(parseData._tokenExpirationDate));
 
     if (loggedUser.token) {
-      this.router.navigate(['dashboard'])
       this.user.next(loggedUser);
+
+      // control path setting another login:-
+      const routePath = location.pathname.substr(1);
+      const locationPath = routePath === '' ? 'dashboard' : routePath;
+      this.router.navigate([locationPath]);
 
       // auto sign out:-
       const exTimeDeu = new Date(parseData._tokenExpirationDate).getTime() - new Date().getTime();
