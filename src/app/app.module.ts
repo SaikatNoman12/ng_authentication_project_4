@@ -25,7 +25,7 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorInterceptor,
       multi: true
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })
