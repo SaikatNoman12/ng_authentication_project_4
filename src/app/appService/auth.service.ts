@@ -12,10 +12,12 @@ import { Route, Router } from '@angular/router';
 })
 export class AuthService {
 
+  private exTime: any;
+
   constructor(
     private http: HttpClient,
     private _errorSer: ErrorService,
-    private router:Router
+    private router: Router
   ) { }
 
   user: any = new BehaviorSubject<any>(null);
@@ -77,13 +79,38 @@ export class AuthService {
     }
 
     const loggedUser = new User(parseData.email, parseData.id, parseData._token, new Date(parseData._tokenExpirationDate));
-    
+
     if (loggedUser.token) {
       this.router.navigate(['dashboard'])
       this.user.next(loggedUser);
+
+      // auto sign out:-
+      const exTimeDeu = new Date(parseData._tokenExpirationDate).getTime() - new Date().getTime();
+      this.autoSignOut(exTimeDeu);
+
     }
   }
 
+  signOut() {
+    this.user.next(null);
+    this.router.navigate(['']);
+    localStorage.removeItem('userData');
+
+    if (this.exTime) {
+      clearTimeout(this.exTime);
+    }
+    this.exTime = null;
+  }
+
+  autoSignOut(exTime: number) {
+
+    this.exTime = setTimeout(() => {
+
+      this.signOut();
+
+    }, exTime);
+
+  }
 
   private authenticatedUser(email: string, userId: string, token: string, expireIn: any) {
 
@@ -91,10 +118,11 @@ export class AuthService {
 
     const user = new User(email, userId, token, expirationDate);
 
-    console.log('User => ', user);
-
     // send subject data:-
     this.user.next(user);
+
+    // autoSignOut:-
+    this.autoSignOut(expireIn * 1000);
 
     // set signup data in localStorage:-
     localStorage.setItem('userData', JSON.stringify(user));

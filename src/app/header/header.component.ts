@@ -6,7 +6,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit {
 
   isLoggedIn: boolean = false;
 
@@ -36,14 +36,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy() {
-
-  }
-
-
+  // sign out:--
   onSignOutData() {
-    localStorage.removeItem('userData');
-    this.isLoggedIn = false;
+    this._authService.signOut();
   }
 
 }
