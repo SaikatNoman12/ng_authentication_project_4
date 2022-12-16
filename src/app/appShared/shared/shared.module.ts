@@ -1,3 +1,4 @@
+import { SpineService } from './../../appService/spine.service';
 import { ErrorService } from './../../appService/error.service';
 import { AddEmployeeService } from './../../appService/add-employee.service';
 import { NgModule } from '@angular/core';
@@ -16,7 +17,8 @@ import { AuthService } from 'src/app/appService/auth.service';
     AddEmployeeService,
     DatabaseService,
     AuthService,
-    ErrorService
+    ErrorService,
+    SpineService
   ]
 })
 export class SharedModule { }

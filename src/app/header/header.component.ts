@@ -1,3 +1,4 @@
+import { SpineService } from './../appService/spine.service';
 import { AuthService } from 'src/app/appService/auth.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
@@ -10,9 +11,22 @@ export class HeaderComponent implements OnInit {
 
   isLoggedIn: boolean = false;
 
+  profileInfo: any;
+
+  spinner: boolean = false;
+
   constructor(
-    private _authService: AuthService
-  ) { }
+    private _authService: AuthService,
+    private _spineService: SpineService
+  ) {
+
+    this._spineService.spine.subscribe(
+      (res: any) => {
+        this.spinner = res;
+      }
+    );
+
+  }
 
   ngOnInit(): void {
     this._authService.user.subscribe(
@@ -32,6 +46,13 @@ export class HeaderComponent implements OnInit {
         // second system. use not operator:-
         this.isLoggedIn = !!res;
 
+      }
+    );
+
+    this._authService.profileInfo.subscribe(
+      (res: any) => {
+        this.profileInfo = res;
+        this._spineService.spine.next(false);
       }
     );
   }

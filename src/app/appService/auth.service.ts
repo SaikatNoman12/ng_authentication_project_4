@@ -13,6 +13,12 @@ import { Route, Router } from '@angular/router';
 export class AuthService {
 
   private exTime: any;
+  user: any = new BehaviorSubject<any>(null);
+  profileInfo: any = new BehaviorSubject({
+    displayName: '',
+    email: '',
+    photoUrl: ''
+  });
 
   constructor(
     private http: HttpClient,
@@ -20,7 +26,6 @@ export class AuthService {
     private router: Router
   ) { }
 
-  user: any = new BehaviorSubject<any>(null);
 
   onSignUp(email: string, pass: string,) {
     return this.http.post<Responce>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${config.API_KEY}`, {
@@ -92,6 +97,7 @@ export class AuthService {
       const exTimeDeu = new Date(parseData._tokenExpirationDate).getTime() - new Date().getTime();
       this.autoSignOut(exTimeDeu);
 
+      this.getProfileData(loggedUser.token);
     }
   }
 
@@ -131,13 +137,13 @@ export class AuthService {
     // set signup data in localStorage:-
     localStorage.setItem('userData', JSON.stringify(user));
 
+    this.getProfileData(token);
+
   }
 
 
   // user profile update:-
   updateProfile(userData: any) {
-
-    console.log(userData);
 
     return this.http.post<any>(`https://identitytoolkit.googleapis.com/v1/accounts:update?key=${config.API_KEY}`,
       {
@@ -152,6 +158,24 @@ export class AuthService {
           }
         )
       );
+
+  }
+
+
+  // get profile data-
+  getProfileData(token: string) {
+
+    this.http.post<any>(`https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${config.API_KEY}`, {
+      idToken: token
+    }).subscribe(
+      (res: any) => {
+        this.profileInfo.next({
+          displayName: res?.users[0]?.displayName,
+          email: res?.users[0]?.email,
+          photoUrl: res?.users[0]?.photoUrl
+        });
+      }
+    )
 
   }
 

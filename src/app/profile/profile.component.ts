@@ -1,3 +1,4 @@
+import { SpineService } from './../appService/spine.service';
 import { AuthService } from 'src/app/appService/auth.service';
 import { Route, Router, ActivatedRoute } from '@angular/router';
 import { Profile } from './../appInterface/profile';
@@ -20,11 +21,17 @@ export class ProfileComponent implements OnInit {
   // get user token:-
   userToken: string = JSON.parse(localStorage.getItem('userData') as any)._token;
 
+  // get profile data:-
+  profileInfo: any;
+
+  spinnerShow: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private _authService: AuthService,
+    private _spineService: SpineService
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +53,20 @@ export class ProfileComponent implements OnInit {
       }
     );
 
+
+    this._authService.profileInfo.subscribe(
+
+      (res: any) => {
+        this.profileInfo = res;
+
+        this.myRecForm.setValue({
+          name: this.profileInfo?.displayName ? this.profileInfo?.displayName : '',
+          profileImageUrl: this.profileInfo?.photoUrl ? this.profileInfo?.photoUrl : ''
+        });
+      }
+
+    );
+
   }
 
   get fControl() {
@@ -54,17 +75,26 @@ export class ProfileComponent implements OnInit {
 
   onRecFormSubmit() {
     if (this.myRecForm.valid) {
+      this.spinnerShow = true;
 
       const profileData: Profile = {
         idToken: this.userToken,
         ...this.myRecForm.value
       };
 
+
+      this._spineService.spine.next(true);
       // set profile data:-
       this._authService.updateProfile(profileData).subscribe(
-        (res: any) => console.log(res),
+        (res: any) => {
+          this._authService.getProfileData(this.userToken);
+          this._spineService.spine.next(false);
+          this.spinnerShow = false;
+        },
         (err: any) => console.log(err)
       )
+
+      this.router.navigate([], { queryParams: { EditMode: null } })
 
     }
     else {

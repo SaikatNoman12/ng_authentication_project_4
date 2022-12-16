@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/appService/auth.service';
 import { DatabaseService } from 'src/app/appService/database.service';
 import { AddEmployeeService } from './../appService/add-employee.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,9 +15,12 @@ export class DashboardComponent implements OnInit {
 
   spinnerShow: boolean = false;
 
+  userInfoData: any;
+
   constructor(
     private _addEmployee: AddEmployeeService,
     private _database: DatabaseService,
+    private _authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -27,9 +31,15 @@ export class DashboardComponent implements OnInit {
         this.addEmployee = res;
       }
     );
-
     // fetch database data:-
     this.onFetchDatabaseData();
+
+    this._authService.profileInfo.subscribe(
+      (res: any) => {
+        this.userInfoData = res;
+      }
+    )
+
   }
 
   // use for popup:-
