@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/appService/auth.service';
 import { Route, Router, ActivatedRoute } from '@angular/router';
 import { Profile } from './../appInterface/profile';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -16,16 +17,20 @@ export class ProfileComponent implements OnInit {
   // edit mode:- 
   editMode: boolean = false;
 
+  // get user token:-
+  userToken: string = JSON.parse(localStorage.getItem('userData') as any)._token;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private _authService: AuthService,
   ) { }
 
   ngOnInit(): void {
     this.myRecForm = this.fb.group({
       'name': [null, [Validators.required]],
-      'profile-img': [null, [Validators.required]]
+      'profileImageUrl': [null, [Validators.required]]
     });
 
     // query params activate route:-
@@ -48,8 +53,23 @@ export class ProfileComponent implements OnInit {
   }
 
   onRecFormSubmit() {
-    const profileData: Profile = this.myRecForm.value;
-    console.log(profileData);
+    if (this.myRecForm.valid) {
+
+      const profileData: Profile = {
+        idToken: this.userToken,
+        ...this.myRecForm.value
+      };
+
+      // set profile data:-
+      this._authService.updateProfile(profileData).subscribe(
+        (res: any) => console.log(res),
+        (err: any) => console.log(err)
+      )
+
+    }
+    else {
+      alert('please fill all data!');
+    }
   }
 
   onDiscard() {

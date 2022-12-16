@@ -1,5 +1,5 @@
 export interface Profile {
-    id?:string,
+    idToken?:string,
     name:string,
-    profileImage:string
+    profileImageUrl:string
 }

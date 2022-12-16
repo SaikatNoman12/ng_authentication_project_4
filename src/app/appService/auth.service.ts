@@ -133,4 +133,26 @@ export class AuthService {
 
   }
 
+
+  // user profile update:-
+  updateProfile(userData: any) {
+
+    console.log(userData);
+
+    return this.http.post<any>(`https://identitytoolkit.googleapis.com/v1/accounts:update?key=${config.API_KEY}`,
+      {
+        idToken: userData.idToken,
+        displayName: userData.name,
+        photoUrl: userData.profileImageUrl,
+        returnSecureToken: true
+      }).pipe(
+        catchError(
+          (err: any) => {
+            return this._errorSer.handleError(err);
+          }
+        )
+      );
+
+  }
+
 }
