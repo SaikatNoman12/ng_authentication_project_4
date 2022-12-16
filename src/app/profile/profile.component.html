@@ -10,6 +10,7 @@
         class="btn btn-success edit-btn"
         routerLink="/profile"
         [queryParams]="{ EditMode: true }"
+        (click)="editModeFunc()"
       >
         <span><i class="fas fa-pencil-alt"></i> </span>
         <span> Edit Profile </span>
@@ -39,7 +40,14 @@
         <label class="h6" for="name">Name:</label>
         <!-- profile section -->
         <ng-container *ngIf="!editMode">
-          <div *ngIf="!spinnerShow && profileInfo?.displayName">
+          <div
+            *ngIf="
+              !spinnerShow &&
+              (profileInfo?.displayName === ''
+                ? profileInfo?.displayName
+                : true)
+            "
+          >
             <small class="trueEdit">{{
               profileInfo?.displayName
                 ? profileInfo?.displayName
@@ -47,7 +55,14 @@
             }}</small>
           </div>
 
-          <ng-container *ngIf="spinnerShow || !profileInfo?.displayName">
+          <ng-container
+            *ngIf="
+              spinnerShow ||
+              (profileInfo?.displayName === ''
+                ? !profileInfo?.displayName
+                : false)
+            "
+          >
             <div>
               <div class="spinner-border text-warning" role="status">
                 <span class="visually-hidden">Loading...</span>
@@ -78,7 +93,12 @@
         <label class="h6" for="profile">Enter profile picture URL:</label>
         <!-- profile section -->
         <ng-container *ngIf="!editMode">
-          <ng-container *ngIf="!spinnerShow && profileInfo?.photoUrl">
+          <ng-container
+            *ngIf="
+              !spinnerShow &&
+              (profileInfo?.photoUrl === '' ? profileInfo?.photoUrl : true)
+            "
+          >
             <div>
               <ng-container *ngIf="profileInfo?.photoUrl ? !true : !false">
                 <small class="trueEdit">
@@ -97,7 +117,12 @@
             </div>
           </ng-container>
 
-          <ng-container *ngIf="spinnerShow || !profileInfo?.photoUrl">
+          <ng-container
+            *ngIf="
+              spinnerShow ||
+              (profileInfo?.photoUrl === '' ? !profileInfo?.photoUrl : false)
+            "
+          >
             <div>
               <div class="spinner-border text-warning" role="status">
                 <span class="visually-hidden">Loading...</span>
@@ -126,16 +151,28 @@
 
       <!-- edit section button -->
       <ng-container *ngIf="editMode">
-        <div class="mb-4">
-          <button type="submit" class="btn btn-primary">Save Profile</button>
-          &nbsp;&nbsp;
-          <button
-            class="px-3 btn btn-outline-secondary"
-            type="button"
-            (click)="onDiscard()"
-          >
-            Discard
-          </button>
+        <div class="mb-4 d-flex align-items-center justify-content-between">
+          <div>
+            <button type="submit" class="btn btn-primary">Save Profile</button>
+            &nbsp;&nbsp;
+            <button
+              class="px-3 btn btn-outline-secondary"
+              type="button"
+              (click)="onDiscard()"
+            >
+              Discard
+            </button>
+          </div>
+
+          <div>
+            <button
+              type="button"
+              class="btn btn-outline-danger"
+              (click)="restRecForm()"
+            >
+              Reset Your Form
+            </button>
+          </div>
         </div>
       </ng-container>
     </form>

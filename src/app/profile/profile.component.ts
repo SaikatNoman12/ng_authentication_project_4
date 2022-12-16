@@ -55,7 +55,6 @@ export class ProfileComponent implements OnInit {
 
 
     this._authService.profileInfo.subscribe(
-
       (res: any) => {
         this.profileInfo = res;
 
@@ -64,8 +63,10 @@ export class ProfileComponent implements OnInit {
           profileImageUrl: this.profileInfo?.photoUrl ? this.profileInfo?.photoUrl : ''
         });
       }
-
     );
+
+    // send my rec form:-
+    this._spineService.myRecFormData.next(this.myRecForm);
 
   }
 
@@ -82,7 +83,6 @@ export class ProfileComponent implements OnInit {
         ...this.myRecForm.value
       };
 
-
       this._spineService.spine.next(true);
       // set profile data:-
       this._authService.updateProfile(profileData).subscribe(
@@ -92,9 +92,9 @@ export class ProfileComponent implements OnInit {
           this.spinnerShow = false;
         },
         (err: any) => console.log(err)
-      )
+      );
 
-      this.router.navigate([], { queryParams: { EditMode: null } })
+      this.router.navigate([], { queryParams: { EditMode: null } });
 
     }
     else {
@@ -104,7 +104,18 @@ export class ProfileComponent implements OnInit {
 
   onDiscard() {
     this.router.navigate([], { queryParams: { EditMode: null } });
-    this.myRecForm.reset();
+  }
+
+
+  editModeFunc() {
+    this._spineService.editModeFuncService(this.myRecForm);
+  }
+
+  // reset form:-
+  restRecForm() {
+    if (confirm('Click ok then reset your form! \n -----OR----- \n Click cancel. Then do not reset your form!')) {
+      this.myRecForm.reset();
+    }
   }
 
 

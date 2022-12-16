@@ -15,6 +15,8 @@ export class HeaderComponent implements OnInit {
 
   spinner: boolean = false;
 
+  myRecForm: any;
+
   constructor(
     private _authService: AuthService,
     private _spineService: SpineService
@@ -23,6 +25,12 @@ export class HeaderComponent implements OnInit {
     this._spineService.spine.subscribe(
       (res: any) => {
         this.spinner = res;
+      }
+    );
+
+    _spineService.myRecFormData.subscribe(
+      (resFormData: any) => {
+        this.myRecForm = resFormData;
       }
     );
 
@@ -55,6 +63,10 @@ export class HeaderComponent implements OnInit {
         this._spineService.spine.next(false);
       }
     );
+  }
+
+  editModeFunc() {
+    this._spineService.editModeFuncService(this.myRecForm);
   }
 
   // sign out:--
