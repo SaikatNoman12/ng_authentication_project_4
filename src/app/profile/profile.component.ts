@@ -2,7 +2,7 @@ import { SpineService } from './../appService/spine.service';
 import { AuthService } from 'src/app/appService/auth.service';
 import { Route, Router, ActivatedRoute } from '@angular/router';
 import { Profile } from './../appInterface/profile';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
