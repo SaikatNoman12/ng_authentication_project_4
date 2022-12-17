@@ -22,10 +22,12 @@ export class SpineService {
       (res: any) => {
         this.profileInfo = res;
 
-        myRecForm.setValue({
-          name: this.profileInfo?.displayName ? this.profileInfo?.displayName : '',
-          profileImageUrl: this.profileInfo?.photoUrl ? this.profileInfo?.photoUrl : ''
-        });
+        if (myRecForm !== undefined) {
+          myRecForm.setValue({
+            name: this.profileInfo?.displayName ? this.profileInfo?.displayName : '',
+            profileImageUrl: this.profileInfo?.photoUrl ? this.profileInfo?.photoUrl : ''
+          });
+        }
       }
     );
   }

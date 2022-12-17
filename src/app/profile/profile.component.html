@@ -37,7 +37,7 @@
   <div>
     <form [formGroup]="myRecForm" (ngSubmit)="onRecFormSubmit()">
       <div class="mb-4">
-        <label class="h6" for="name">Name:</label>
+        <label class="h6" for="name">{{!editMode ? 'Name: ': 'Edit Name: '}}</label>
         <!-- profile section -->
         <ng-container *ngIf="!editMode">
           <div
@@ -90,7 +90,7 @@
       </div>
 
       <div class="mb-4">
-        <label class="h6" for="profile">Enter profile picture URL:</label>
+        <label class="h6" for="profile">{{!editMode ? 'Profile Picture: ' : 'Edit Profile Picture URL: ' }}</label>
         <!-- profile section -->
         <ng-container *ngIf="!editMode">
           <ng-container
@@ -141,7 +141,7 @@
             formControlName="profileImageUrl"
           />
           <small
-            *ngIf="!fControl?.['profile-img']?.valid && fControl?.['profile-img']?.touched"
+            *ngIf="!fControl?.['profileImageUrl']?.valid && fControl?.['profileImageUrl']?.touched"
             class="text-danger"
           >
             Please edit your profile picture!</small
@@ -169,6 +169,7 @@
               type="button"
               class="btn btn-outline-danger"
               (click)="restRecForm()"
+              [disabled]="!myRecForm.valid"
             >
               Reset Your Form
             </button>

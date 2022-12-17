@@ -162,21 +162,45 @@ export class AuthService {
   }
 
 
-  // get profile data-
+  // get profile data:-
   getProfileData(token: string) {
 
     this.http.post<any>(`https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${config.API_KEY}`, {
       idToken: token
-    }).subscribe(
-      (res: any) => {
-        this.profileInfo.next({
-          displayName: res?.users[0]?.displayName,
-          email: res?.users[0]?.email,
-          photoUrl: res?.users[0]?.photoUrl
-        });
-      }
-    )
+    })
+      .pipe(
+        catchError(
+          (err: any) => {
+            return this._errorSer.handleError(err);
+          }
+        )
+      )
+      .subscribe(
+        (res: any) => {
+          this.profileInfo.next({
+            displayName: res?.users[0]?.displayName,
+            email: res?.users[0]?.email,
+            photoUrl: res?.users[0]?.photoUrl
+          });
+        }
+      );
 
+  }
+
+  // change password:-
+  changePassword(data: any) {
+    return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:update?key=${config.API_KEY}`, {
+      idToken: data.idToken,
+      password: data.password,
+      returnSecureToken: true
+    }
+    ).pipe(
+      catchError(
+        (err: any) => {
+          return this._errorSer.handleError(err);
+        }
+      )
+    );
   }
 
 }

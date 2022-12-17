@@ -32,6 +32,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./profile/profile.module')
       .then(m => m.ProfileModule)
+  },
+  {
+    path: 'change-password',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./chnage-password/chnage-password.module')
+      .then(m => m.ChnagePasswordModule)
   }
 ];
 
