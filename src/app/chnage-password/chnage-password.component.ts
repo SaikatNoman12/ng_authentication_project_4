@@ -1,3 +1,4 @@
+import { Route, Router } from '@angular/router';
 import { AuthService } from 'src/app/appService/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -17,7 +18,8 @@ export class ChnagePasswordComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -39,10 +41,13 @@ export class ChnagePasswordComponent implements OnInit {
         ...this.myRecForm.value
       };
 
+      this.changePass = false;
+
       this._authService.changePassword(data).subscribe(
         (res) => {
           // console.log(res);
-          this.changePass = false;
+          localStorage.removeItem('userData');
+          this.router.navigate(['']);
         },
         (err) => { }
       );
