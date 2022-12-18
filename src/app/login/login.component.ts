@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../appService/auth.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { GoogleLoginProvider, SocialAuthService} from 'angularx-social-login';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private _authService: AuthService,
     private _errorService: ErrorService,
-    private router: Router
+    private router: Router,
   ) { }
 
   errorMsg: any = this._errorService.errorMessage;
@@ -77,7 +78,7 @@ export class LoginComponent implements OnInit {
           setTimeout(() => {
             this.error = '';
           }, 6000);
-          
+
           /* // error message:- 
           if (!err.error || !err.error.error) {
             this.error = this.errorMsg['UNKNOWN'];
@@ -93,5 +94,6 @@ export class LoginComponent implements OnInit {
     else {
     }
   }
+
 
 }
