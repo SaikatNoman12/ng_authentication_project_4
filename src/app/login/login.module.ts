@@ -14,6 +14,6 @@ import { LoginComponent } from './login.component';
     CommonModule,
     LoginRoutingModule,
     ReactiveFormsModule
-  ]
+  ],
 })
 export class LoginModule { }

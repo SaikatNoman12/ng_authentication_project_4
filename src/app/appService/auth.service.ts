@@ -224,28 +224,25 @@ export class AuthService {
   }
 
   // use for google login:-
-  // googleLogin(idToken: any) {
-  //   return this.http.post<any>(
-  //     `https://identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=${config.API_KEY}`,
-  //     {
-  //       postBody: `id_token=${idToken}&providerId=google.com`,
-  //       requestUri: "http://localhost/4200",
-  //       returnIdpCredential: true,
-  //       returnSecureToken: true
-  //     }
-  //   )
-  //     .pipe(
-  //       catchError(
-  //         (err: any) => {
-  //           return this._errorSer.handleError(err);
-  //         }
-  //       ),
-  //       tap(
-  //         res => {
-  //           this.authenticatedUser(res.email, res.localId, res.idToken, +res.expiresIn)
-  //         }
-  //       )
-  //     );
-  // }
+  googleSignIn(idToken: any) {
+    return this.http.post<any>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=${config.API_KEY}`, {
+      postBody: `id_token=${idToken}&providerId=google.com`,
+      requestUri: "http://localhost/4200",
+      returnIdpCredential: true,
+      returnSecureToken: true
+    })
+      .pipe(
+        catchError(
+          (err: any) => {
+            return this._errorSer.handleError(err);
+          }
+        ),
+        tap(
+          (res: any) => {
+            this.authenticatedUser(res.email, res.localId, res.idToken, +res.expiresIn);
+          }
+        )
+      );
+  }
 
 }

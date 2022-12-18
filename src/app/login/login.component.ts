@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../appService/auth.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { GoogleLoginProvider, SocialAuthService} from 'angularx-social-login';
+import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
     private _authService: AuthService,
     private _errorService: ErrorService,
     private router: Router,
+    private _socialAuthService: SocialAuthService
   ) { }
 
   errorMsg: any = this._errorService.errorMessage;
@@ -95,5 +96,20 @@ export class LoginComponent implements OnInit {
     }
   }
 
+
+  onGoogleSignIn(): void {
+    this._socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID)
+      .then(
+        (user: any) => {
+          console.log();
+          this._authService.googleSignIn(user.idToken).subscribe(
+            (res: any) => {
+              this.router.navigate(['dashboard']);
+            },
+            (err: any) => { }
+          );
+        }
+      );
+  }
 
 }
