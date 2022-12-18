@@ -11,7 +11,7 @@
           }}</a>
         </div> -->
         <ng-container *ngIf="!isLoggedIn">
-          <button class="signIn" type="button">
+          <button routerLink="/" class="signIn" type="button">
             {{ "sign in" | titlecase }}
           </button>
         </ng-container>

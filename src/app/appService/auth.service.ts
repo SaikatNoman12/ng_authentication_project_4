@@ -26,7 +26,7 @@ export class AuthService {
     private router: Router
   ) { }
 
-
+  // use for sign up:--
   onSignUp(email: string, pass: string,) {
     return this.http.post<Responce>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${config.API_KEY}`, {
       email: email,
@@ -47,7 +47,7 @@ export class AuthService {
       );
   }
 
-
+  // use for sign in:--
   onSignIn(email: any, pass: any) {
 
     return this.http.post<Responce>(
@@ -72,6 +72,7 @@ export class AuthService {
       );
   }
 
+  // use for auto sign in
   autoSignIn() {
 
     // const myData = JSON.parse(localStorage.getItem('userData') as any);
@@ -90,7 +91,7 @@ export class AuthService {
 
       // control path setting another login:-
       const routePath = location.pathname.substr(1);
-      const locationPath = routePath === '' ? 'dashboard' : routePath;
+      const locationPath = routePath === '' || routePath === 'forget-password' ? 'dashboard' : routePath;
       this.router.navigate([locationPath]);
 
       // auto sign out:-
@@ -101,6 +102,7 @@ export class AuthService {
     }
   }
 
+  // use for sign out:--
   signOut() {
     this.user.next(null);
     this.router.navigate(['']);
@@ -112,6 +114,7 @@ export class AuthService {
     this.exTime = null;
   }
 
+  // use for auto sign out:--
   autoSignOut(exTime: number) {
 
     this.exTime = setTimeout(() => {
@@ -122,9 +125,10 @@ export class AuthService {
 
   }
 
+  // set data in localStorage:-- 
   private authenticatedUser(email: string, userId: string, token: string, expireIn: any) {
 
-    const expirationDate = new Date(new Date().getTime() + expireIn * 1000);
+    const expirationDate = new Date(new Date().getTime() + expireIn * 5000);
 
     const user = new User(email, userId, token, expirationDate);
 
@@ -140,7 +144,6 @@ export class AuthService {
     this.getProfileData(token);
 
   }
-
 
   // user profile update:-
   updateProfile(userData: any) {
@@ -160,7 +163,6 @@ export class AuthService {
       );
 
   }
-
 
   // get profile data:-
   getProfileData(token: string) {
@@ -187,7 +189,7 @@ export class AuthService {
 
   }
 
-  // change password:-
+  // use for change password:-
   changePassword(data: any) {
     return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:update?key=${config.API_KEY}`, {
       idToken: data.idToken,
@@ -200,6 +202,24 @@ export class AuthService {
           return this._errorSer.handleError(err);
         }
       )
+    );
+  }
+
+  // use for forget password:-
+  forgetPassword(data: any) {
+    return this.http.post(
+      `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${config.API_KEY}`,
+      {
+        requestType: "PASSWORD_RESET",
+        email: data.email
+      }
+    )
+      .pipe(
+        catchError(
+          (err:any) => {
+            return this._errorSer.handleError(err);
+          }
+        )
     );
   }
 

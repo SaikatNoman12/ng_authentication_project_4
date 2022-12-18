@@ -22,6 +22,11 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'forget-password',
+    loadChildren: () => import('./forget-pass/forget-pass.module')
+      .then(m => m.ForgetPassModule)
+  },
+  {
     path: 'dashboard',
     canActivate: [AuthGuard],
     loadChildren: () => import('./dashboard/dashboard.module')
